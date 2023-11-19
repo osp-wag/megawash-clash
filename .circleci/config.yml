@@ -36,7 +36,7 @@ jobs:
       -run:
         command: yarn test
         name: Run tests
-  verify_lint
+  verify_lint:
     executor: node/default
     steps:
       -run:
