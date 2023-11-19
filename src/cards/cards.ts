@@ -12,7 +12,9 @@ export type Card = {
     capacity: number
 }
 
-const fileUrl = './src/cards/cards.csv'
+// ensure that data used for testing doesnt change when new cards are added
+const fileUrl = process.env.NODE_ENV === 'test' ? './src/cards/cards.test.csv' : './src/cards/cards.csv'
+
 
 export const getCards = (): Card[] => {
     try {
@@ -38,13 +40,16 @@ export const addCard = () => {
         const energyRatingInput = readlineSync.question("Energy rating: ")
         const fastestProgramInput = readlineSync.question("Fastest program: ")
         const capacityInput = readlineSync.question("Capacity: ")
+
         const card = validateAndCreateCard(nameInput, brandInput, rpmInput, energyRatingInput, fastestProgramInput, capacityInput)
+
         try {
             if (card === null) {
                 throw new Error()
             }
-            const { name, brand, rpm, energyRating, fastestProgram, capacity } = card
-            fs.appendFileSync(fileUrl, `\n${name}, ${brand}, ${rpm}, ${energyRating}, ${fastestProgram} minutes, ${capacity} kg`);
+            const { name, brand, rpm, fastestProgram, capacity } = card
+            console.log(card)
+            fs.appendFileSync(fileUrl, `\n${name}, ${brand}, ${rpm}, ${energyRatingInput}, ${fastestProgram} minutes, ${capacity} kg`);
             console.log("Card inserted successfully")
         } catch {
             console.log("Inserting card failed")

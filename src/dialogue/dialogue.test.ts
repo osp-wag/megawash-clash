@@ -9,7 +9,7 @@ describe("dialogue", () => {
         question.mockImplementationOnce(() => "Hello")
         // needed valid answer to break the loop
         question.mockImplementationOnce(() => '3')
-        const _ = createDialogue<NumberOfPlayersAnswers>("numberOfPlayers")
+        createDialogue<NumberOfPlayersAnswers>("numberOfPlayers") /* eslint-disable-line @typescript-eslint/no-unused-vars */
         expect(console.log).toHaveBeenLastCalledWith(expect.stringContaining("Invalid answer"))
     })
 

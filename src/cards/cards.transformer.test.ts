@@ -21,7 +21,7 @@ describe("cards transformer", () => {
     it('should correctly validate capacity', () => {
         expect(validateCapacity('8.5')).toBe(true)
         expect(validateCapacity('65.76')).toBe(true)
-        expect(validateCapacity('5')).toBe(false)
+        expect(validateCapacity('5')).toBe(true)
         expect(validateCapacity('F')).toBe(false)
     })
 

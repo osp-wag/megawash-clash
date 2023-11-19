@@ -2,11 +2,14 @@ import { Card } from "../cards/cards";
 
 export type PlayerType = 'Human' | 'AI'
 
-interface IPlayer {
+export interface IPlayer {
+    type: PlayerType
+    name: string
     setCards: (cards: Card[]) => void
     addCardsToBottom: (cards: Card[]) => void
     getTopCard: () => Card
-    removeTopCard: () => void
+    removeTopCard: () => Card
+    getCardAmount: () => number
 }
 
 export default class Player implements IPlayer {
@@ -43,3 +46,6 @@ export default class Player implements IPlayer {
     }
 
 }
+
+export const playersWithoutCardsFilter = (player: IPlayer) => player.getCardAmount() <= 0
+export const playersWithCardsFilter = (player: IPlayer) => player.getCardAmount() >= 1

@@ -6,7 +6,7 @@
   "type": "commonjs",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "dev": "nodemon --config \"./nodemon.json\"/",
     "build": "rm -rf ./dist && tsc --project ./",
     "prod": "yarn build && node dist/index.js",

@@ -1,6 +1,14 @@
 import readlineSync from 'readline-sync'
 
-const createDialogue = <T extends GameStartAnswers | NumberOfPlayersAnswers | MaxTurnsAnswers | CreateNewAnswers | ChooseFeatureAnswers | NextCardAnswers>(dialogue: keyof typeof DIALOGUES, lowercase = true): T => {
+const createDialogue = 
+<T extends 
+| GameStartAnswers 
+| NumberOfPlayersAnswers 
+| MaxTurnsAnswers 
+| CreateNewAnswers 
+| ChooseFeatureAnswers 
+| NextCardAnswers
+>(dialogue: keyof typeof DIALOGUES, lowercase = true): T => {
     const selectedDialogue = DIALOGUES[dialogue]
     let answer = ''
     let dirty = false
@@ -8,7 +16,7 @@ const createDialogue = <T extends GameStartAnswers | NumberOfPlayersAnswers | Ma
         if (dirty) {
             console.log(`Invalid answer. Valid answers are: ${selectedDialogue.answers.join(', ')}\n`)
         }
-        answer = readlineSync.question(`${selectedDialogue.question}: `)
+        answer = readlineSync.question(`${selectedDialogue.question}: `).trim()
         dirty = true
     }
     
@@ -25,7 +33,7 @@ export type GameStartAnswers = typeof gameStartAnswers[number]
 const numberOfPlayersAnswers = ['3', '4', '5', '6', '7', '8'] as const
 export type NumberOfPlayersAnswers = typeof numberOfPlayersAnswers[number]
 
-const maxTurnsAnswers = ['no', ...Array(90).fill(10).map((x, index) => (x+index).toString()) ] as const
+const maxTurnsAnswers = ['no', ...Array(91).fill(10).map((x, index) => (x+index).toString()) ] as const
 export type MaxTurnsAnswers = typeof maxTurnsAnswers[number]
 
 const createNewAnswers = ['start a new game', 'go back'] as const
@@ -42,11 +50,11 @@ export type NextCardAnswers = typeof nextCardAnswers[number]
 
 export const DIALOGUES = Object.freeze({
     gameStart: {
-        question: 'Would you like to 1) play a game 2) add a new card 3) exit?',
+        question: 'Would you like to 1) play a game 2) add a new card 3) exit',
         answers: gameStartAnswers
     },
     numberOfPlayers: {
-        question: 'What should be the number of players (3-8)?',
+        question: 'What should be the number of players (3-8)',
         answers: numberOfPlayersAnswers
     },
     maxTurns: {
@@ -54,11 +62,11 @@ export const DIALOGUES = Object.freeze({
         answers: maxTurnsAnswers
     },
     createNew: {
-        question: 'Would you like to 1) Start a new game or 2) Go back?',
+        question: 'Would you like to 1) Start a new game or 2) Go back',
         answers: createNewAnswers
     },
     chooseFeature: {
-        question: 'Which feature would you like to choose? (rpm, energyRating, fastestProgram, capacity)',
+        question: 'Which feature would you like to choose (rpm, energyRating, fastestProgram, capacity)',
         answers: chooseFeatureAnswers
     },
     nextTurn: {
@@ -66,7 +74,7 @@ export const DIALOGUES = Object.freeze({
         answers: nextTurnAnswers
     },
     nextCard: {
-        question: "Do you want to 1) create another card 2) go back?",
+        question: "Do you want to 1) create another card 2) go back",
         answers: nextCardAnswers
     }
 })

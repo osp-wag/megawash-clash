@@ -25,13 +25,17 @@ export const validateEnergyRating = (energyRating: string): boolean => {
 }
 
 export const validateCapacity = (capacity: string): boolean => {
-    const capacityRegex = /^\d+\.\d+$/
+    const capacityRegex = /^\d+(\.\d+)?$/;
     return capacityRegex.test(capacity)
 }
 
-export const validateAndCreateCard = (name: string, brand: string, rawRPM: string, energyRating: string, rawFastestProgram: string, capacity: string): Card | null => {
-    const rpm = parseInt(rawRPM)
-    const fastestProgram = parseInt(rawFastestProgram)
+export const validateAndCreateCard = (rawName: string, rawBrand: string, rawRPM: string, rawEnergyRating: string, rawFastestProgram: string, rawCapacity: string): Card | null => {
+    const name = rawName.trim()
+    const brand = rawBrand.trim()
+    const rpm = parseInt(rawRPM.trim())
+    const energyRating = rawEnergyRating.trim()
+    const fastestProgram = parseInt(rawFastestProgram.trim())
+    const capacity = parseFloat(rawCapacity.trim())
     
     if (isNaN(rpm)) {
         console.log("Invalid RPM. RPM must be a number.")
@@ -45,7 +49,7 @@ export const validateAndCreateCard = (name: string, brand: string, rawRPM: strin
         console.log("Invalid fastest program. Fastest program must be a number.")
         return null
     }
-    if (!validateCapacity(capacity)) {
+    if (!validateCapacity(capacity.toString())) {
         console.log("Invalid capacity. Example format: 8.5")
         return null
     }
@@ -56,6 +60,6 @@ export const validateAndCreateCard = (name: string, brand: string, rawRPM: strin
         rpm,
         energyRating: calculateEnergyRating(energyRating),
         fastestProgram,
-        capacity: parseInt(capacity)
+        capacity
     }
 }
