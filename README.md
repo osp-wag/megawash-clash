@@ -43,3 +43,7 @@ Clone the repo `git clone https://github.com/osp-wag/megawash-clash`
 `yarn install && yarn dev`
 
 ## Architecture <a name="architecture"></a>
+
+<img width="863" alt="Screenshot 2023-11-19 at 18 34 34" src="https://github.com/osp-wag/megawash-clash/assets/110827273/69a346a5-1c81-42ac-8748-18ccd1860ab2">
+
+
