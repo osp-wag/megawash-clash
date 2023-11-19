@@ -6,16 +6,16 @@ orbs:
 workflows:
   verify_code:
     jobs:
-      - build_install_packages
+      - verify_lint
       - test:
           requires:
-            - build_install_packages
-      - verify_lint:
+            - verify_lint
+      - build:
           requires:
             - test
 
 jobs:
-  build_install_packages:
+  build:
     executor: node/default
     steps: 
       - checkout
@@ -28,12 +28,17 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           command: yarn test
           name: Run tests
   verify_lint:
     executor: node/default
     steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
       - checkout
       - run:
           command: yarn lint:ci
