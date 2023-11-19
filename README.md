@@ -1,6 +1,6 @@
-# `megawash-mash`
+# `megawash-clash`
 
-[CircleCI](https://app.circleci.com/pipelines/github/osp-wag/megawash-mash) **[@osp-wag](https://github.com/osp-wag)**
+[CircleCI](https://app.circleci.com/pipelines/github/osp-wag/megawash-clash) **[@osp-wag](https://github.com/osp-wag)**
 
 ---
 

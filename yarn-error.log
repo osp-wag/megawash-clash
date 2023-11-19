@@ -28,7 +28,7 @@ Trace:
 
 npm manifest: 
   {
-    "name": "megawash-mash",
+    "name": "megawash-clash",
     "version": "1.0.0",
     "description": "",
     "main": "dist/index.js",
