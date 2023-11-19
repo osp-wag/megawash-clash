@@ -1,1 +1,24 @@
 version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+workflows:
+  test and verify lint:
+    jobs:
+      - checkout and install packages:
+        steps:
+          - checkout
+          - node/install-packages
+            pkg-manager: yarn
+      - run tests:
+        steps:
+          - run:
+            name: Run tests
+            command: yarn:test
+      - run lint:
+        steps:
+          - run:
+            name: Run lint
+            command: yarn lint:ci
+      
