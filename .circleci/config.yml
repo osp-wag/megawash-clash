@@ -16,3 +16,9 @@ jobs:
       - run:
           command: yarn lint:ci
           name: Verify lint
+      - run:
+          command: yarn build
+          name: Build app
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
