@@ -6,30 +6,28 @@ orbs:
 workflows:
   verify_code:
     jobs:
-      - install_packages
-      - build:
-          requires:
-            - install_packages
+      - build_install_packages:
       - test:
           requires:
-            - build
+            - build_install_packages
       - verify_lint:
           requires:
             - test
 
 jobs:
-  install_packages:
+  build_install_packages:
     executor: node/default
     steps: 
       - checkout
       - node/install-packages:
           pkg-manager: yarn
-  build:
-    executor: node/default
-    steps:
       - run:
           command: yarn build
           name: Build app
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
   test:
     executor: node/default
     steps:
