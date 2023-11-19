@@ -7,13 +7,13 @@ workflows:
   verify_code:
     jobs:
       - install_packages
-      - build
+      - build:
         requires:
           - install_packages
-      - test
+      - test:
         requires:
           - build
-      - verify_lint
+      - verify_lint:
         requires:
           - test
 
