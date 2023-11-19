@@ -8,14 +8,14 @@ workflows:
     jobs:
       - install_packages
       - build:
-        requires:
-          - install_packages
+          requires:
+            - install_packages
       - test:
-        requires:
-          - build
+          requires:
+            - build
       - verify_lint:
-        requires:
-          - test
+          requires:
+            - test
 
 jobs:
   install_packages:
@@ -28,18 +28,17 @@ jobs:
     executor: node/default
     steps:
       - run:
-        command: yarn build
-        name: Build app
+          command: yarn build
+          name: Build app
   test:
     executor: node/default
     steps:
       - run:
-        command: yarn test
-        name: Run tests
+          command: yarn test
+          name: Run tests
   verify_lint:
     executor: node/default
     steps:
       - run:
-        command: yarn lint:ci
-        name: Verify lint
-      
+          command: yarn lint:ci
+          name: Verify lint
