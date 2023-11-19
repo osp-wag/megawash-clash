@@ -24,19 +24,17 @@ jobs:
       - run:
           command: yarn build
           name: Build app
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
   test:
     executor: node/default
     steps:
+      - checkout
       - run:
           command: yarn test
           name: Run tests
   verify_lint:
     executor: node/default
     steps:
+      - checkout
       - run:
           command: yarn lint:ci
           name: Verify lint
