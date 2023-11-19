@@ -1,20 +1,18 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.7
+  node: circleci/node@5.0.2
 
-workflows:
-  test-and-verify-lint:
-    jobs:
-      test-and-verify-lint:
-        steps:
-          - checkout
-          - run:
-            name: Run tests
-            command: yarn:test
-          - run:
-            name: Run lint
-            command: yarn lint:ci
-        
-      
-      
+jobs:
+  test_and_lint: 
+    executor: node/default 
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: yarn test
+          name: Run tests
+      - run:
+          command: yarn lint:ci
+          name: Verify lint
