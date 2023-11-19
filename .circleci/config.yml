@@ -27,19 +27,19 @@ jobs:
   build:
     executor: node/default
     steps:
-      -run:
+      - run:
         command: yarn build
         name: Build app
   test:
     executor: node/default
     steps:
-      -run:
+      - run:
         command: yarn test
         name: Run tests
   verify_lint:
     executor: node/default
     steps:
-      -run:
+      - run:
         command: yarn lint:ci
         name: Verify lint
       
