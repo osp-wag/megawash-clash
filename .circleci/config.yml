@@ -3,8 +3,13 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
 
+workflows:
+  verify_code:
+    jobs:
+      - build_test_lint
+
 jobs:
-  test_and_lint: 
+  build_test_lint: 
     executor: node/default 
     steps:
       - checkout
@@ -19,6 +24,3 @@ jobs:
       - run:
           command: yarn build
           name: Build app
-      - persist_to_workspace:
-          root: ~/project
-          paths: .
