@@ -6,13 +6,15 @@ orbs:
 workflows:
   test-and-verify-lint:
     jobs:
-      - checkout
-      - run:
-          name: Run tests
-          command: yarn:test
-      - run:
-        name: Run lint
-        command: yarn lint:ci
+      test-and-verify-lint:
+        steps:
+          - checkout
+          - run:
+            name: Run tests
+            command: yarn:test
+          - run:
+            name: Run lint
+            command: yarn lint:ci
         
       
       
